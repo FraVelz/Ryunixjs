@@ -1,0 +1,66 @@
+{
+  "name": "@unsetsoft/ryunixjs",
+  "version": "1.2.5-canary.4",
+  "license": "MIT",
+  "main": "./dist/Ryunix.umd.js",
+  "module": "./dist/Ryunix.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/Ryunix.esm.js",
+      "require": "./dist/Ryunix.umd.js",
+      "default": "./dist/Ryunix.umd.js"
+    },
+    "./package.json": "./package.json",
+    "./jsx-runtime": {
+      "import": "./jsx/jsx-runtime.js",
+      "require": "./jsx/jsx-runtime.js",
+      "default": "./jsx/jsx-runtime.js"
+    },
+    "./jsx-dev-runtime": {
+      "import": "./jsx/jsx-dev-runtime.js",
+      "require": "./jsx/jsx-dev-runtime.js",
+      "default": "./jsx/jsx-dev-runtime.js"
+    }
+  },
+  "files": [
+    "dist",
+    "jsx"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build",
+    "canary:release": "npm publish --tag canary",
+    "release": "npm publish",
+    "lint": "eslint . --ext .js --fix --max-warnings=0 --config .eslintrc.js --no-eslintrc",
+    "prettier-check": "prettier -c .",
+    "prettier-fix": "prettier -w .",
+    "test": "jest --testPathPattern=src"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "4.59.0",
+    "@rollup/plugin-node-resolve": "16.0.3",
+    "@rollup/plugin-commonjs": "29.0.0",
+    "@rollup/plugin-terser": "0.4.4",
+    "eslint": "9.39.2",
+    "@babel/core": "7.28.5",
+    "@babel/preset-env": "7.28.5",
+    "jest": "30.2.0",
+    "babel-jest": "30.2.0",
+    "jest-environment-jsdom": "30.2.0"
+  },
+  "engines": {
+    "node": "20 || ^22 || ^24"
+  },
+  "keywords": [
+    "ryunixjs"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "bugs": {
+    "url": "https://github.com/UnSetSoft/Ryunixjs/issues"
+  },
+  "homepage": "https://github.com/UnSetSoft/Ryunixjs#readme"
+}

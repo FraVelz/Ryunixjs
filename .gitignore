@@ -1,0 +1,12 @@
+node_modules
+yarn.lock
+.ryunix
+package-lock.json
+_cra
+test
+.yarn
+.pnp.loader.mjs
+.pnp.cjs
+.turbo
+text.md
+pnpm-lock.yaml

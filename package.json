@@ -1,0 +1,72 @@
+{
+  "name": "@unsetsoft/ryunix",
+  "version": "1.2.4-canary.3",
+  "private": true,
+  "homepage": "./",
+  "workspaces": [
+    "packages/*",
+    "test/*"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "eslint . --max-warnings=0 --config eslint.config.mjs && turbo run lint",
+    "lint:fix": "pnpm run format && eslint . --fix --max-warnings=0 --config eslint.config.mjs && turbo run lint -- --fix",
+    "format": "prettier -w .",
+    "format:check": "prettier -c .",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rimraf node_modules",
+    "kg:init": "gmvu init",
+    "kg:bump": "gmvu bump",
+    "release:canary": "npm run kg:bump && pnpm run format && pnpm --parallel --filter @unsetsoft/ryunixjs run canary:release",
+    "release:stable": "npm run kg:bump && pnpm run format && pnpm --parallel --filter @unsetsoft/ryunixjs run release",
+    "cra:release": "pnpm --parallel --filter @unsetsoft/cra run release",
+    "cra:nightly": "pnpm --parallel --filter @unsetsoft/cra run nightly:release",
+    "publish:all": "pnpm -r --filter \"!./test/**\" --filter \"!@unsetsoft/ryunix-devtools\" publish",
+    "publish:canary": "pnpm -r --filter \"!./test/**\" --filter \"!@unsetsoft/ryunix-devtools\" publish --tag canary",
+    "changelog": "commit-and-tag-version --header '# Changelog'",
+    "git:push": "git push --follow-tags origin",
+    "run:web": "cross-env NODE_OPTIONS=--max-old-space-size=4096 pnpm --filter ./test/webpack run dev",
+    "run:web:build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 pnpm --filter ./test/webpack run build",
+    "run:web:start": "pnpm --filter ./test/webpack run start"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "7.28.5",
+    "@babel/preset-react": "7.28.5",
+    "@eslint/compat": "2.0.0",
+    "@kagarisoft/gmvu-cli": "1.0.5",
+    "@rollup/plugin-terser": "1.0.0",
+    "@typescript-eslint/eslint-plugin": "8.50.0",
+    "@typescript-eslint/parser": "8.50.0",
+    "cross-env": "10.1.0",
+    "eslint": "9.39.2",
+    "eslint-plugin-eslint-plugin": "7.2.0",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-react": "7.37.5",
+    "jest": "30.2.0",
+    "jest-environment-jsdom": "30.2.0",
+    "prettier": "3.7.4",
+    "rimraf": "6.1.2",
+    "commit-and-tag-version": "12.5.0",
+    "turbo": "2.8.17",
+    "typescript": "5.9.3",
+    "postcss": "8.5.8",
+    "postcss-loader": "7.0.2"
+  },
+  "packageManager": "pnpm@10.26.0",
+  "pnpm": {
+    "overrides": {
+      "@unsetsoft/ryunixjs": "workspace:*",
+      "@unsetsoft/ryunix-presets": "workspace:*",
+      "@unsetsoft/cra": "workspace:*",
+      "tmp": "0.2.4",
+      "lodash": "4.17.23",
+      "serialize-javascript": "7.0.4"
+    }
+  }
+}
